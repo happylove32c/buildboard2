@@ -1,5 +1,3 @@
-// components/Sidebar.tsx
-
 "use client"
 
 import { useState } from "react"
@@ -23,12 +21,17 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={`h-screen border-r bg-white transition-all duration-300 ease-in-out ${
+      className={`h-screen border-r bg-white transition-all duration-300 ease-in-out overflow-hidden ${
         collapsed ? "w-16" : "w-64"
       }`}
     >
+      {/* Top Bar */}
       <div className="flex items-center justify-between px-4 py-3 border-b">
-        <span className={`text-lg font-semibold ${collapsed ? "hidden" : "block"}`}>
+        <span
+          className={`text-lg font-semibold whitespace-nowrap overflow-hidden transition-all duration-300 ${
+            collapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100 w-full"
+          }`}
+        >
           Buildboard
         </span>
         <Button
@@ -43,7 +46,11 @@ export default function Sidebar() {
       <div className="p-4 space-y-6">
         {/* Projects Section */}
         <div>
-          <h2 className={`text-sm font-semibold text-gray-500 mb-2 ${collapsed ? "hidden" : "block"}`}>
+          <h2
+            className={`text-sm font-semibold text-gray-500 mb-2 transition-all duration-300 ${
+              collapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"
+            }`}
+          >
             Projects
           </h2>
           <ul className="space-y-1">
@@ -51,10 +58,16 @@ export default function Sidebar() {
               <li key={project.id}>
                 <Link
                   href={`/projects/${project.id}`}
-                  className="flex items-center gap-2 text-sm text-gray-800 hover:text-black"
+                  className="flex items-center text-sm text-gray-800 hover:text-black"
                 >
                   <Folder size={16} />
-                  {!collapsed && project.title}
+                  <span
+                    className={`ml-2 whitespace-nowrap overflow-hidden transition-all duration-300 ${
+                      collapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"
+                    }`}
+                  >
+                    {project.title}
+                  </span>
                 </Link>
               </li>
             ))}
@@ -63,7 +76,11 @@ export default function Sidebar() {
 
         {/* Queries Section */}
         <div>
-          <h2 className={`text-sm font-semibold text-gray-500 mb-2 ${collapsed ? "hidden" : "block"}`}>
+          <h2
+            className={`text-sm font-semibold text-gray-500 mb-2 transition-all duration-300 ${
+              collapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"
+            }`}
+          >
             Your Prompts
           </h2>
           <ul className="space-y-1">
@@ -71,10 +88,16 @@ export default function Sidebar() {
               <li key={i}>
                 <Link
                   href={`/queries/${i}`}
-                  className="flex items-center gap-2 text-sm text-gray-800 hover:text-black"
+                  className="flex items-center text-sm text-gray-800 hover:text-black"
                 >
                   <MessageSquare size={16} />
-                  {!collapsed && query}
+                  <span
+                    className={`ml-2 whitespace-nowrap overflow-hidden transition-all duration-300 ${
+                      collapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"
+                    }`}
+                  >
+                    {query}
+                  </span>
                 </Link>
               </li>
             ))}
