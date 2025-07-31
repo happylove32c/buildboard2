@@ -61,6 +61,9 @@ export default function Home() {
                   <div className="text-sm">
                     <strong>Current Task:</strong> {idea.currentTask}
                   </div>
+                  <Link href="/projects/1"> {/* Replace with dynamic project ID */}
+                    <Button className="mt-2">Get back to project</Button>
+                  </Link>
                 </CardContent>
               </Card>
             )
