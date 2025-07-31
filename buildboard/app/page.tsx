@@ -5,8 +5,10 @@
 import Navbar from "@/components/Navbar"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { Plus } from "lucide-react"
 import { Progress } from "@/components/ui/progress"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import FloatingActionButton from "@/components/FloatingActionButton"
 
 const ideas = [
   {
@@ -70,6 +72,7 @@ export default function Home() {
           })}
         </div>
       </main>
+      <FloatingActionButton/>
     </div>
   )
 }
