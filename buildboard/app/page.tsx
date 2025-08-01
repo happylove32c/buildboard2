@@ -3,7 +3,6 @@
 import Navbar from "@/components/Navbar"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import AuthModal from "@/components/AuthModal"
 import { Progress } from "@/components/ui/progress"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import FloatingActionButton from "@/components/FloatingActionButton"
@@ -43,7 +42,6 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <AuthModal/>
       <main className="max-w-6xl mx-auto p-4 space-y-6">
         <div className="flex items-center justify-between flex-wrap gap-2">
           <h1 className="text-3xl font-bold">Your Ideas Overview</h1>

@@ -9,7 +9,7 @@ export default function AuthButton() {
 
   return (
     <Button variant="outline" className="border border-black" size="lg" onClick={toggleAuth}>
-      {isLogin ? "Log In" : "Sign Up"}
+      {isLogin ? "Log In" : "Profile"}
     </Button>
   )
 }
