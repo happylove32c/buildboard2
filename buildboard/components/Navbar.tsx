@@ -5,6 +5,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
+import AuthButton from "@/components/AuthButton"
 import { Button } from "@/components/ui/button"
 
 export default function Navbar() {
@@ -38,9 +39,7 @@ export default function Navbar() {
             </Link>
           ))}
 
-          <Button variant="outline" size="sm">
-            Log In
-          </Button>
+          <AuthButton/>
         </div>
       </div>
     </nav>
