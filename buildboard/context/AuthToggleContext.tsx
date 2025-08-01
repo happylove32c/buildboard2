@@ -4,19 +4,21 @@
 import { createContext, useContext, useState, ReactNode } from "react"
 
 type AuthToggleContextType = {
-  isLogin: boolean
-  toggleAuth: () => void
+  isModalOpen: boolean
+  openModal: () => void
+  closeModal: () => void
 }
 
 const AuthToggleContext = createContext<AuthToggleContextType | undefined>(undefined)
 
 export const AuthToggleProvider = ({ children }: { children: ReactNode }) => {
-  const [isLogin, setIsLogin] = useState(true)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const toggleAuth = () => setIsLogin(prev => !prev)
+  const openModal = () => setIsModalOpen(true)
+  const closeModal = () => setIsModalOpen(false)
 
   return (
-    <AuthToggleContext.Provider value={{ isLogin, toggleAuth }}>
+    <AuthToggleContext.Provider value={{ isModalOpen, openModal, closeModal }}>
       {children}
     </AuthToggleContext.Provider>
   )

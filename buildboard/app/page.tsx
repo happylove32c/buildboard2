@@ -46,9 +46,6 @@ export default function Home() {
         <div className="flex items-center justify-between flex-wrap gap-2">
           <h1 className="text-3xl font-bold">Your Ideas Overview</h1>
           <Link href="/new">
-            <Button variant="default" className="flex items-center gap-2">
-              <span>New Idea</span>
-            </Button>
           </Link>
         </div>
 
