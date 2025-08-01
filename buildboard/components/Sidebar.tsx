@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Folder, MessageSquare } from "lucide-react"
 import Link from "next/link"
+import { motion, AnimatePresence } from "framer-motion"
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false)
@@ -20,90 +21,85 @@ export default function Sidebar() {
   ]
 
   return (
-    <aside
-      className={`h-screen border-r bg-white transition-all duration-300 ease-in-out overflow-hidden ${
-        collapsed ? "w-16" : "w-64"
-      }`}
+    <motion.aside
+      animate={{ width: collapsed ? 64 : 256 }}
+      className="h-screen border-r bg-white overflow-hidden flex flex-col transition-all ease-in-out"
     >
       {/* Top Bar */}
       <div className="flex items-center justify-between px-4 py-3 border-b">
-        <span
-          className={`text-lg font-semibold whitespace-nowrap overflow-hidden transition-all duration-300 ${
-            collapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100 w-full"
-          }`}
-        >
-          Buildboard
-        </span>
+        <AnimatePresence initial={false}>
+          {!collapsed && (
+            <motion.span
+              key="title"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              className="text-lg font-semibold whitespace-nowrap"
+            >
+              Buildboard
+            </motion.span>
+          )}
+        </AnimatePresence>
+
         <Button
           variant="ghost"
           size="icon"
           onClick={() => setCollapsed(!collapsed)}
+          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
         </Button>
       </div>
 
-      <div className="p-4 space-y-6">
+      <div className="p-4 space-y-6 flex-1">
         {/* Projects Section */}
         <div>
-          <h2
-            className={`text-sm font-semibold text-gray-500 mb-2 transition-all duration-300 ${
-              collapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"
-            }`}
-          >
-            Projects
-          </h2>
+          {!collapsed && (
+            <h2 className="text-lg font-semibold text-gray-500 mb-2">
+              Projects
+            </h2>
+          )}
           <ul className="space-y-1">
             {projects.map((project) => (
               <li key={project.id}>
                 <Link
                   href={`/projects/${project.id}`}
-                  className="flex items-center text-sm text-gray-800 hover:text-black"
+                  className="flex items-center text-lg text-gray-800 hover:text-black transition-colors"
                 >
-                  <Folder size={16} />
-                  <span
-                    className={`ml-2 whitespace-nowrap overflow-hidden transition-all duration-300 ${
-                      collapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"
-                    }`}
-                  >
-                    {project.title}
-                  </span>
+                  <Folder size={20} />
+                  {!collapsed && (
+                    <span className="ml-2 truncate">{project.title}</span>
+                  )}
                 </Link>
               </li>
             ))}
           </ul>
         </div>
 
-        {/* Queries Section */}
+        {/* Prompts Section */}
         <div>
-          <h2
-            className={`text-sm font-semibold text-gray-500 mb-2 transition-all duration-300 ${
-              collapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"
-            }`}
-          >
-            Your Prompts
-          </h2>
+          {!collapsed && (
+            <h2 className="text-lg font-semibold text-gray-500 mb-2">
+              Your Prompts
+            </h2>
+          )}
           <ul className="space-y-1">
             {queries.map((query, i) => (
               <li key={i}>
                 <Link
                   href={`/queries/${i}`}
-                  className="flex items-center text-sm text-gray-800 hover:text-black"
+                  className="flex items-center text-lg text-gray-800 hover:text-black transition-colors"
                 >
-                  <MessageSquare size={16} />
-                  <span
-                    className={`ml-2 whitespace-nowrap overflow-hidden transition-all duration-300 ${
-                      collapsed ? "opacity-0 pointer-events-none w-0" : "opacity-100"
-                    }`}
-                  >
-                    {query}
-                  </span>
+                  <MessageSquare size={20} />
+                  {!collapsed && (
+                    <span className="ml-2 truncate">{query}</span>
+                  )}
                 </Link>
               </li>
             ))}
           </ul>
         </div>
       </div>
-    </aside>
+    </motion.aside>
   )
 }

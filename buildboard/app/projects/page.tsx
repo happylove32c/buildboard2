@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
+import Link from "next/link"
 
 const projects = [
   {
@@ -98,9 +99,11 @@ export default function ProjectsPage() {
 
         {/* Optional CTA */}
         <div className="flex justify-center pt-4">
-          <Button variant="default" size="lg">
-            Create New Project
-          </Button>
+          <Link href="/new">
+            <Button variant="default" className="flex items-center gap-2">
+              <span>Create New Project</span>
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
