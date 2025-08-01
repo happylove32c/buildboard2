@@ -8,7 +8,7 @@ export default function AuthButton() {
   const { isLogin, toggleAuth } = useAuthToggle()
 
   return (
-    <Button variant="outline" size="sm" onClick={toggleAuth}>
+    <Button variant="outline" className="border border-black" size="lg" onClick={toggleAuth}>
       {isLogin ? "Log In" : "Sign Up"}
     </Button>
   )
