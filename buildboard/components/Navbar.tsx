@@ -45,7 +45,7 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Bottom Nav */}
-      <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t shadow-inner z-50">
+      <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t p-6 shadow-inner z-50">
         <div className="flex justify-around py-2">
           {navLinks.map(({ href, icon: Icon }) => (
             <Link
@@ -56,7 +56,7 @@ export default function Navbar() {
                 pathname === href ? "text-black" : "text-muted-foreground"
               )}
             >
-              <Icon className="w-5 h-5" />
+              <Icon className="h-6" />
             </Link>
           ))}
         </div>

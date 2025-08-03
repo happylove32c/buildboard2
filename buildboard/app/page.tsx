@@ -40,7 +40,7 @@ const ideas = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen p-4 bg-gray-50">
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
       <main className="max-w-6xl mx-auto p-4 space-y-6">
         <div className="flex items-center justify-between flex-wrap gap-2">
@@ -49,7 +49,7 @@ export default function Home() {
           </Link>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 p-4 md:grid-cols-2 lg:grid-cols-3">
           {ideas.map((idea, i) => {
             const percent = (idea.completedSteps / idea.totalSteps) * 100
             return (
