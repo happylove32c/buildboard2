@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import AuthButton from "@/components/AuthButton"
-import { Home, FolderKanban, PlusSquare } from "lucide-react"
+import { Home, FolderKanban, PlusSquare, User } from "lucide-react"
 
 export default function Navbar() {
   const pathname = usePathname()
@@ -59,6 +59,13 @@ export default function Navbar() {
               <Icon className="h-6" />
             </Link>
           ))}
+
+            <button
+              // onClick={openModal}
+              className="flex flex-col items-center text-xs text-muted-foreground transition-colors"
+            >
+              <User className="h-6" />
+            </button>
         </div>
       </nav>
     </>
