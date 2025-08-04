@@ -23,8 +23,7 @@ const projects = [
     description: "A learning roadmap app for developers with milestones and curated resources.",
     tags: ["Education", "Frontend", "Tracking"],
     createdAt: "2025-07-20",
-    updatedAt: "2025-07-30",
-    
+    updatedAt: "2025-08-30",
   },
   {
     id: 3,
@@ -33,15 +32,16 @@ const projects = [
     tags: ["Ecommerce", "PDF", "Birthday"],
     createdAt: "2025-07-15",
     updatedAt: "2025-07-29",
-    lastUpdated: true,
   },
 ]
 
 export default function ProjectsPage() {
-  const [selectedProject, setSelectedProject] = useState(null)
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null)
 
-  const lastUpdated = projects.find((p) => p.lastUpdated)
-  const others = projects.filter((p) => !p.lastUpdated)
+  const sortedProjects = [...projects].sort(
+    (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+  )
+  const [lastUpdated, ...others] = sortedProjects
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -56,19 +56,19 @@ export default function ProjectsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <h2 className="text-xl font-semibold text-primary mb-1">
+            <h2 className="text-xl font-semibold text-blue-600 mb-1">
               Last Updated: {lastUpdated.updatedAt}
             </h2>
             <h3 className="text-2xl font-bold mb-2">{lastUpdated.title}</h3>
             <p className="text-gray-700 mb-4">{lastUpdated.description}</p>
             <div className="flex flex-wrap gap-2 mb-4">
               {lastUpdated.tags.map((tag) => (
-                <Badge key={tag} variant="secondary">
+                <Badge key={`${lastUpdated.id}-${tag}`} variant="secondary">
                   {tag}
                 </Badge>
               ))}
             </div>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-sm text-gray-500">
               Created: {lastUpdated.createdAt} | Updated: {lastUpdated.updatedAt}
             </div>
           </motion.div>
@@ -88,12 +88,12 @@ export default function ProjectsPage() {
               <p className="text-gray-600 text-sm mb-2">{project.description}</p>
               <div className="flex flex-wrap gap-2 mb-2">
                 {project.tags.map((tag) => (
-                  <Badge key={tag} variant="outline">
+                  <Badge key={`${project.id}-${tag}`} variant="outline">
                     {tag}
                   </Badge>
                 ))}
               </div>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-xs text-gray-500">
                 Created: {project.createdAt} | Updated: {project.updatedAt}
               </p>
             </motion.div>
@@ -109,7 +109,6 @@ export default function ProjectsPage() {
         </div>
       </div>
 
-      {/* Modal component */}
       {selectedProject && (
         <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
       )}
